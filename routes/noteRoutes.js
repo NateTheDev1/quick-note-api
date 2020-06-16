@@ -26,4 +26,17 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
+// Delete a post
+router.delete("/:noteId", verifyToken, async (req, res) => {
+  try {
+    const foundNote = await Note.deleteOne({ _id: req.params.noteId });
+    if (foundNote.deletedCount === 0) {
+      return res.json("No Notes Were Deleted, NoteId does not exist.");
+    }
+    res.json(foundNote);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 module.exports = router;
