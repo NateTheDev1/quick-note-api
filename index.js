@@ -1,9 +1,22 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
 dotenv.config();
 app.use(express.json());
+
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("Db Connected");
+  }
+);
+
+// Import routes
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/user", authRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to the QuickNote API");
