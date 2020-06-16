@@ -17,6 +17,8 @@ mongoose.connect(
 // Import routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/user", authRoutes);
+const noteRoutes = require("./routes/noteRoutes");
+app.use("/api/notes", noteRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to the QuickNote API");
