@@ -1,4 +1,5 @@
 # QuickNotes API
+> https://quick-note-api.herokuapp.com/
 
 The QuickNotes API Dependencies
 
@@ -50,14 +51,14 @@ Current Routes Available.
 #### Auth
 
 ```js
-axios.post("https://URL.COM/api/user/register", { userInput }).then((res) => {
+axios.post("https://quick-note-api.herokuapp.com/api/user/register", { userInput }).then((res) => {
   // Returns {name: String, email: String, password: String}
   console.log(res.data);
 });
 ```
 
 ```js
-axios.post("https://URL.COM/api/user/login", { userInput }).then((res) => {
+axios.post("https://quick-note-api.herokuapp.com/api/user/login", { userInput }).then((res) => {
   // Returns token; Example: asdhsakdjahu32b2404bd
   console.log(res.data);
 });
@@ -68,7 +69,7 @@ axios.post("https://URL.COM/api/user/login", { userInput }).then((res) => {
 > Required a unique token with all requests to /notes
 
 ```js
-axios.get("https://URL.COM/api/notes", {
+axios.get("https://quick-note-api.herokuapp.com/api/notes", {
   headers: {
     Authorization: TOKEN,
   },
@@ -80,7 +81,7 @@ axios.get("https://URL.COM/api/notes", {
 Want to contribute? Great!
 
 Fork this repository and make a pull request!
-If you want to use this API as it is, it is located here: https://NOTDEPLOYEDYET.com
+If you want to use this API as it is, it is located here: https://quick-note-api.herokuapp.com/
 
 ## License
 
