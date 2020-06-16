@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
   const emailExists = await User.findOne({ email: req.body.email });
@@ -8,7 +9,7 @@ router.post("/register", async (req, res) => {
     return res.status(400).send("Email already in use.");
   }
 
-  const salt = await bcrypt.genSalt(10, process.env.SALT_KEY);
+  const salt = await bcrypt.genSalt(10);
 
   const hashedPass = await bcrypt.hash(req.body.password, salt);
 
@@ -23,6 +24,22 @@ router.post("/register", async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
+});
+
+router.post("/login", async (req, res) => {
+  // Check email
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(400).send("Email or password is incorrect.");
+  }
+
+  const validPass = await bcrypt.compare(req.body.password, user.password);
+  if (!validPass) {
+    return res.status(400).send("Email or password is incorrect.");
+  }
+
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_KEY);
+  res.header("Authorization", token).send(token);
 });
 
 module.exports = router;
