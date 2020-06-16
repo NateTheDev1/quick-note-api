@@ -9,6 +9,15 @@ router.get("/", verifyToken, async (req, res) => {
   res.json(notes);
 });
 
+// Find note by id
+router.get("/:noteId", verifyToken, async (req, res) => {
+  const note = await Note.findOne({ _id: req.params.noteId });
+  if (!note) {
+    return res.status(400).send("Note does not exist, or noteId is invalid.");
+  }
+  res.json(note);
+});
+
 // Create a new note
 
 router.post("/", verifyToken, async (req, res) => {
@@ -37,6 +46,23 @@ router.delete("/:noteId", verifyToken, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
+});
+
+// Update a note
+router.put("/:noteId", verifyToken, (req, res) => {
+  Note.findByIdAndUpdate(
+    { _id: req.params.noteId },
+    {
+      $set: { title: req.body.title, content: req.body.content },
+    },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        return res.status(400).send("Error updating this note.");
+      }
+      return res.json(doc);
+    }
+  );
 });
 
 module.exports = router;
