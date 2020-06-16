@@ -34,14 +34,16 @@ $ npm run start
 
 Current Routes Available.
 
-| NAME                        | TYPE   | REQ                                   | RES              | HEADER |
-| --------------------------- | ------ | ------------------------------------- | ---------------- | ------ |
-| /                           | GET    | N/A                                   | STRING           | N/A    |
-| /api/user/register          | POST   | Object with name, email, and password | USER OBJECT      | N/A    |
-| /api/user/login             | POST   | Object with email and password        | TOKEN            | N/A    |
-| /api/user/notes             | GET    | N/A                                   | NOTES ARRAY      | TOKEN  |
-| /api/user/notes             | POST   | Object with a title and content key   | CREATED NOTE     | TOKEN  |
-| /api/user/notes/`${noteId}` | DELETE | N/A                                   | DELETION RECEIPT | TOKEN  |
+| NAME                     | TYPE   | REQ                                   | RES                  | HEADER |
+| ------------------------ | ------ | ------------------------------------- | -------------------- | ------ |
+| /                        | GET    | N/A                                   | STRING               | N/A    |
+| /api/user/register       | POST   | Object with name, email, and password | USER OBJECT          | N/A    |
+| /api/user/login          | POST   | Object with email and password        | TOKEN                | N/A    |
+| /api/user/notes          | GET    | N/A                                   | NOTES ARRAY          | TOKEN  |
+| /api/user/notes/`noteId` | GET    | N/A                                   | SPECIFIED NOTE BY ID | TOKEN  |
+| /api/user/notes          | POST   | Object with a title and content key   | CREATED NOTE         | TOKEN  |
+| /api/user/notes/`noteId` | DELETE | N/A                                   | DELETION RECEIPT     | TOKEN  |
+| /api/user/notes/`noteId` | PUT    | Object with a title and content key   | UPDATED NOTE         | TOKEN  |
 
 ### Example Requests
 
