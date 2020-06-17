@@ -7,7 +7,10 @@ const cors = require("cors");
 dotenv.config();
 app.use(express.json());
 //allow OPTIONS on all resources
-app.options('*', cors())
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  next();
+})
 
 mongoose.connect(
   process.env.DB_CONNECTION,
