@@ -2,7 +2,9 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
+router.use(cors());
 router.post("/register", async (req, res) => {
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) {
