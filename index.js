@@ -5,9 +5,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 dotenv.config();
-app.use(cors({
-  methods: ['GET', 'POST', 'DELETE', 'PUT']
-}));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next();
+});
 app.use(express.json());
 
 mongoose.connect(
