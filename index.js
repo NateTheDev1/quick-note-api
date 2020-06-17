@@ -8,8 +8,8 @@ dotenv.config();
 app.use(express.json());
 //allow OPTIONS on all resources
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', '*')
+  res.append('Access-Control-Allow-Origin', '*')
+  res.append('Access-Control-Allow-Headers', '*')
   next();
 })
 
