@@ -3,16 +3,11 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
+app.use(cors())
 
 dotenv.config();
 app.use(express.json());
 app.options('*', cors())
-
-app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
 
 mongoose.connect(
   process.env.DB_CONNECTION,
