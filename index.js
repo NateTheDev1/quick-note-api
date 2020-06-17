@@ -7,7 +7,7 @@ const cors = require("cors");
 dotenv.config();
 app.use(express.json());
 app.use(cors({  "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",));
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",}));
 
 mongoose.connect(
   process.env.DB_CONNECTION,
