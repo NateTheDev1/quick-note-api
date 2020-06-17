@@ -3,10 +3,10 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
-app.use(cors())
 
 dotenv.config();
 app.use(express.json());
+//allow OPTIONS on all resources
 app.options('*', cors())
 
 mongoose.connect(
