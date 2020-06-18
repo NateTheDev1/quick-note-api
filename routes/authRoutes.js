@@ -3,6 +3,14 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+router.get('/:id', async (req, res) => {
+  const user = await User.findOne({_id: req.params.id})
+  if(!user) {
+    res.status(400).send('User note found')
+  }
+  res.status(200).send(user)
+})
+
 router.post("/register", async (req, res) => {
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) {
